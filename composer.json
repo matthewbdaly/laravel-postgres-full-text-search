@@ -20,7 +20,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Matthewbdaly\\LaravelCart\\": "src/"
+            "Matthewbdaly\\LaravelPostgresFullTextSearch\\": "src/"
         }
     },
     "autoload-dev": {
