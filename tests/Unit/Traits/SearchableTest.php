@@ -21,6 +21,14 @@ class SearchableTest extends TestCase
         $this->assertEquals('select * from (select *, to_tsvector(\'english\', posts.title) || to_tsvector(\'english\', posts.text) as document from "posts") search where search.document @@ to_tsquery(\'english\', \'foo\') order by ts_rank(search.document, to_tsquery(\'english\', \'foo\')) desc', $query->toSql());
     }
 
+    public function testScopeWithSelect()
+    {
+        $this->app['config']->set('fulltextsearch.language', 'english');
+        $model = new Post;
+        $query = Post::search('foo', ['posts.title']);
+        $this->assertEquals('select posts.title from (select *, to_tsvector(\'english\', posts.title) || to_tsvector(\'english\', posts.text) as document from "posts") search where search.document @@ to_tsquery(\'english\', \'foo\') order by ts_rank(search.document, to_tsquery(\'english\', \'foo\')) desc', $query->toSql());
+    }
+
     public function testScopeEmpty()
     {
         $model = new Post;
