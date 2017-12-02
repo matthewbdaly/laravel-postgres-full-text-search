@@ -15,9 +15,10 @@ class SearchableTest extends TestCase
 
     public function testScope()
     {
+        $this->app['config']->set('fulltextsearch.language', 'english');
         $model = new Post;
         $query = Post::search('foo');
-        $this->assertEquals('select * from "posts"', $query->toSql());
+        $this->assertEquals('select posts.id, to_tsvector(\'english\', posts.title), to_tsvector(\'english\', posts.text) from "posts"', $query->toSql());
     }
 
     public function testScopeEmpty()

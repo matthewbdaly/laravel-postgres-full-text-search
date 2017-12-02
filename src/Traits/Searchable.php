@@ -9,6 +9,13 @@ trait Searchable
         if (!$search) {
             return $query;
         }
-        return $query;
+        $lang = config('fulltextsearch.language');
+        $table = $this->getTable();
+        $searchable = $this->searchable;
+        foreach ($searchable as $k => $v) {
+            $searchable[$k] = "to_tsvector('$lang', $table.$v)";
+        }
+        array_unshift($searchable, $table.".".$this->getKeyName());
+        return $query->selectRaw(implode(", ", $searchable));
     }
 }
