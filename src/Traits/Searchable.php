@@ -16,6 +16,9 @@ trait Searchable
             $searchable[$k] = "to_tsvector('$lang', $table.$v)";
         }
         array_unshift($searchable, $table.".".$this->getKeyName());
-        return $query->selectRaw(implode(", ", $searchable));
+        $subquery = "(".implode(", ", $searchable) . "as document from ".$table.") search";
+        return $query->selectRaw($subquery)
+            ->whereRaw()
+            ->orderByRaw();
     }
 }
