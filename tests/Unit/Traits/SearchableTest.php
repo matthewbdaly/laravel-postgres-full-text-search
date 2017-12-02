@@ -12,4 +12,11 @@ class SearchableTest extends TestCase
         $model = new Post;
         $this->assertHasTrait('Matthewbdaly\LaravelPostgresFullTextSearch\Traits\Searchable', $model);
     }
+
+    public function testScope()
+    {
+        $model = new Post;
+        $query = Post::search('foo');
+        $this->assertEquals('select * from "posts"', $query->toSql());
+    }
 }
