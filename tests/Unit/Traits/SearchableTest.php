@@ -19,4 +19,11 @@ class SearchableTest extends TestCase
         $query = Post::search('foo');
         $this->assertEquals('select * from "posts"', $query->toSql());
     }
+
+    public function testScopeEmpty()
+    {
+        $model = new Post;
+        $query = Post::search('');
+        $this->assertEquals('select * from "posts"', $query->toSql());
+    }
 }
