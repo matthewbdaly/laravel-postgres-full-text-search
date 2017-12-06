@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/matthewbdaly/laravel-postgres-full-text-search.svg?branch=master)](https://travis-ci.org/matthewbdaly/laravel-postgres-full-text-search)
 [![Coverage Status](https://coveralls.io/repos/github/matthewbdaly/laravel-postgres-full-text-search/badge.svg?branch=master)](https://coveralls.io/github/matthewbdaly/laravel-postgres-full-text-search?branch=master)
 
-Add Postgres full text search to your models.
+Add Postgres full text search to your models. Currently in development.
 
 Installation
 ------------
